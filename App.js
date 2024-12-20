@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// App.js
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { UserProvider } from './context/UserContext';
+import MainScreen from './screens/MainScreen';
+import QRCodeScreen from './screens/QRCodeScreen';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <UserProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="MainScreen">
+          <Stack.Screen name="MainScreen" component={MainScreen} />
+          <Stack.Screen name="QRCode" component={QRCodeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
